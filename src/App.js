@@ -10,7 +10,7 @@ function App() {
   const[amount2,setAmount2]= useState(1);
   const[currency1,setCurrency1]= useState('USD');
   const[currency2,setCurrency2]= useState('EUR');
-  const[rates,setRates]=useState([]);
+
   useEffect(()=>{
     axios.get('https://api.apilayer.com/fixer/latest?base=USD&apikey=dh1WTqbM4tTjNtrdUOHa6LndmSvS1Kh3').then(response =>{
       setRates(response.data.rates)
@@ -18,6 +18,7 @@ function App() {
     })
 },[]);
 useEffect(()=>{
+ const[rates,setRates]=useState([]);
  if(!!rates){
   handleAmount1Change(1);
 
