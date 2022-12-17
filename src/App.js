@@ -18,26 +18,28 @@ function App() {
 
     })
 },[]);
-useEffect(()=>{
-  function handleAmount1Change(amount1){
+  
+  const handleAmount1Change= useCallback((amount1)=>{
   setAmount2(format(amount1*rates[currency2]/rates[currency1]));
   setAmount1(amount1);
+},[rates,currency1,currency2])
+  
+function handleCurrency1Change(currency1){
+  setAmount2(format(amount1*rates[currency2]/rates[currency1]));
+  setCurrency1(currency1);
 }
-
+useEffect(()=>{
  if(!!rates){
   handleAmount1Change(1);
 
  }
-},[rates])
+},[rates, handleAmount1Change])
+
 
 function format(number){
   return number.toFixed(4);
 }
 
-function handleCurrency1Change(currency1){
-  setAmount2(format(amount1*rates[currency2]/rates[currency1]));
-  setCurrency1(currency1);
-}
 
 function handleAmount2Change(amount2){
   setAmount1(format(amount2*rates[currency1]/rates[currency2]));
